@@ -1,2 +1,20 @@
 .works {
+  width: 100%;
+  height: auto;
+  background-color: #eee;
+}
+.cardFlx {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardStr {
+  width: 30%;
+  padding: 5%;
+  height: auto;
+}
+
+.slick-prev,
+.slick-next:before {
+  color: yellow;
 }

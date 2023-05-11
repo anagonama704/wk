@@ -6,8 +6,17 @@ import { Card } from "@mui/material";
 import Image from "next/image";
 import Footer from "./component/Footer";
 import styles from "@/styles/Work.module.css";
-
+interface Tasks {
+  id: string;
+  image: string;
+  name: string;
+  others: string;
+  info: string;
+  period: string;
+  link: string;
+}
 const Top = ({ tasks }: any) => {
+  const taskss: Tasks[] = tasks;
   const title: string = "ポートフォリオ";
   return (
     <>
@@ -15,7 +24,7 @@ const Top = ({ tasks }: any) => {
       <div className={styles.works}>
         <h1>Firebaseのページ</h1>
 
-        {tasks.map((task: any) => (
+        {taskss.map((task: Tasks) => (
           <Card
             key={task.id}
             style={{ backgroundColor: "#eee", width: "80%", height: "800px" }}

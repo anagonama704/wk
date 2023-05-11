@@ -6,10 +6,10 @@ import {
   ReactPortal,
 } from "react";
 import { db } from "../../Firebase/db";
-import Header from "./component/Header";
+import Header from "../component/Header";
 import styles from "../styles/Home.module.css";
 import { Card } from "@mui/material";
-import Footer from "./component/Footer";
+import Footer from "../component/Footer";
 
 interface Tasks {
   id: string;

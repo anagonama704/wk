@@ -1,11 +1,11 @@
 import next from "next/types";
 import Link from "next/link";
-import Header from "./component/Header";
+import Header from "../component/Header";
 import { db } from "../../Firebase/db";
 import { Card } from "@mui/material";
 import Image from "next/image";
 import Slider from "react-slick";
-import Footer from "./component/Footer";
+import Footer from "../component/Footer";
 import styles from "@/styles/Work.module.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";

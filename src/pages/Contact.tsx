@@ -1,5 +1,5 @@
 import next from "next/types";
-import Header from "./component/Header";
+import Header from "../component/Header";
 
 const Contact = () => {
   const ctt: string = "contacts";

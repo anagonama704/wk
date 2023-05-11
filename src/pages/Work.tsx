@@ -4,8 +4,12 @@ import Header from "./component/Header";
 import { db } from "../../Firebase/db";
 import { Card } from "@mui/material";
 import Image from "next/image";
+import Slider from "react-slick";
 import Footer from "./component/Footer";
 import styles from "@/styles/Work.module.css";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import "slick-carousel/slick/slick.css";
 interface Tasks {
   id: string;
   image: string;
@@ -24,40 +28,64 @@ const Top = ({ tasks }: any) => {
       <div className={styles.works}>
         <h1>Firebaseのページ</h1>
 
-        {taskss.map((task: Tasks) => (
-          <Card
-            key={task.id}
-            style={{ backgroundColor: "#eee", width: "80%", height: "800px" }}
-          >
-            <Card
-              style={{
-                width: "700px",
-                height: "100px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#c8e0e3",
-              }}
-            >
-              <div
+        <Slider
+          dots
+          lazyLoad="ondemand"
+          infinite
+          slidesToShow={1}
+          slidesToScroll={1}
+          className="slides"
+          autoplay
+          autoplaySpeed={2000}
+          centerMode
+          arrows={false}
+        >
+          {taskss.map((task: Tasks) => (
+            <div key={task.id}>
+              <Card
+                key={task.id}
                 style={{
-                  width: "80%",
-                  height: "80%",
-                  backgroundImage: `url(${task.image})`,
+                  backgroundColor: "#fff",
+                  width: "70%",
+                  height: "500px",
+                  margin: "0 auto",
                 }}
-              ></div>
-            </Card>
-            {task.name}
-            {task.others}
-            {task.info}
+                className={styles.cardFlx}
+              >
+                <Card
+                  style={{
+                    width: "50%",
+                    height: "300px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#c8e0e3",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "90%",
+                      height: "83%",
+                      backgroundImage: `url(${task.image})`,
+                      backgroundSize: "cover",
+                    }}
+                  ></div>
+                </Card>
+                <div className={styles.cardStr}>
+                  <p>{task.name}</p>
+                  <p>{task.others}</p>
+                  <p>{task.info}</p>
 
-            {task.period}
+                  <p>{task.period}</p>
 
-            <a href={task.link} target="_blank">
-              aaaa
-            </a>
-          </Card>
-        ))}
+                  <a href={task.link} target="_blank">
+                    aaaa
+                  </a>
+                </div>
+              </Card>
+            </div>
+          ))}
+        </Slider>
       </div>
       <Footer />
     </>
@@ -78,7 +106,6 @@ export async function getStaticProps() {
       period: doc.data().period,
       link: doc.data().link,
     };
-    console.log(data.name);
     tasks.push(data);
   });
   return {

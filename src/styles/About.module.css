@@ -1,0 +1,108 @@
+.about {
+  width: 100%;
+  height: auto;
+  padding: 50px 0;
+}
+.cards {
+  width: 60%;
+  height: 426px;
+  padding: 70px 0;
+  margin: 0 auto;
+}
+.fli {
+  font-size: 25px;
+}
+.imgflip figcaption {
+  background-color: #fff;
+  color: #000;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+}
+
+.imgflip a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.myimg {
+  width: 300px;
+  height: auto;
+}
+.pro {
+  width: 350px;
+  height: auto;
+}
+.imgflip * {
+  transition: all 0.36s ease;
+}
+
+.imgflip {
+  -webkit-perspective: 50em;
+  perspective: 50em;
+}
+
+.imgflip:hover figcaption {
+  opacity: 1;
+  transition-delay: 0s;
+  overflow: auto;
+}
+.figcaption h3 {
+  padding: 0 0 0 10%;
+}
+.skill_cd {
+  width: 80%;
+  height: auto;
+  padding: 20px 25px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.imgflip:hover .fli {
+  -webkit-transform: rotateX(-180deg);
+  transform: rotateX(-180deg);
+}
+
+.imgflip figcaption {
+  -webkit-transform: rotateX(90deg);
+  transform: rotateX(90deg);
+  -webkit-transform-origin: 0% 50%;
+  transform-origin: 0% 50%;
+}
+
+.imgflip:hover figcaption {
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+
+.flexs {
+  padding: 0 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.p_pd {
+  padding: 5px 0;
+  line-height: 20px;
+  justify-content: flex-start;
+}
+.p_pd p:first-child {
+  display: block;
+  width: 30%;
+}
+.p_pd p:last-child {
+  display: block;
+  width: 70%;
+}
+.p {
+  font-size: 16px;
+}

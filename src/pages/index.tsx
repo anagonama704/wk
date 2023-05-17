@@ -31,16 +31,15 @@ export default function Firebase({ tasks }: any) {
           <h1>Firebaseのページ</h1>
         </div>
         <div className={styles.cardcmp}>
-          {taskss.map((task: Tasks) => (
-            <div
-              key={task.id}
-              style={{
-                width: "100%",
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "space-around",
-              }}
-            >
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
+            }}
+          >
+            {taskss.map((task: Tasks) => (
               <Card
                 className={styles.miniCard}
                 key={task.id}
@@ -48,7 +47,6 @@ export default function Firebase({ tasks }: any) {
                 href={task.link}
                 target="_blank"
               >
-                {/* <Image src={task.image} width={100} height={100} alt="ok"></Image> */}
                 <div
                   style={{
                     width: "300px",
@@ -59,44 +57,8 @@ export default function Firebase({ tasks }: any) {
                   }}
                 ></div>
               </Card>
-              <Card
-                className={styles.miniCard}
-                key={task.id}
-                component="a"
-                href={task.link}
-                target="_blank"
-              >
-                {/* <Image src={task.image} width={100} height={100} alt="ok"></Image> */}
-                <div
-                  style={{
-                    width: "300px",
-                    height: "160px",
-                    backgroundImage: `url(${task.image})`,
-                    backgroundSize: "cover",
-                    border: "#000 1px solid",
-                  }}
-                ></div>
-              </Card>
-              <Card
-                className={styles.miniCard}
-                key={task.id}
-                component="a"
-                href={task.link}
-                target="_blank"
-              >
-                {/* <Image src={task.image} width={100} height={100} alt="ok"></Image> */}
-                <div
-                  style={{
-                    width: "300px",
-                    height: "160px",
-                    backgroundImage: `url(${task.image})`,
-                    backgroundSize: "cover",
-                    border: "#000 1px solid",
-                  }}
-                ></div>
-              </Card>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       <Footer />

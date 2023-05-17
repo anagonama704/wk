@@ -1,0 +1,28 @@
+.contact {
+  width: 100%;
+  height: auto;
+  padding: 50px 0;
+  background-color: #eee;
+}
+.form_card {
+  width: 60%;
+  height: 70vh;
+  margin: 0 auto;
+  padding: 50px 0 0 0;
+  background-color: #fff;
+}
+.input_cmp {
+  width: 60%;
+  height: auto;
+  margin: 0 auto;
+}
+.input_area {
+  width: 100%;
+  height: auto;
+  margin: 30px 0 0 0;
+}
+.send_btn {
+  width: 100%;
+  height: auto;
+  margin: 60px 0 0 0;
+}

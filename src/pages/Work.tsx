@@ -41,6 +41,7 @@ const Top = ({ tasks }: any) => {
           <IconButton
             onClick={() => {
               slicker.current?.slickPrev();
+              miniSlicker.current?.slickPrev();
             }}
             style={{
               position: "absolute",
@@ -51,72 +52,90 @@ const Top = ({ tasks }: any) => {
           >
             <ArrowBackIosNewIcon fontSize="large" />
           </IconButton>
-          <Slider
-            dots={false}
-            lazyLoad="ondemand"
-            infinite
-            slidesToShow={1}
-            slidesToScroll={1}
-            autoplay
-            autoplaySpeed={2000}
-            centerMode
-            arrows={false}
-            ref={slicker}
-          >
-            {taskss.map((task: Tasks) => (
-              <div key={task.id}>
-                <Card
-                  key={task.id}
-                  style={{
-                    backgroundColor: "#fff",
-                    width: "70%",
-                    height: "400px",
-                    margin: "0 auto",
-                    textDecoration: "none",
-                  }}
-                  component="a"
-                  target="_blank"
-                  href={task.link}
-                  className={styles.cardFlx}
-                >
-                  <Card
-                    style={{
-                      width: "50%",
-                      height: "300px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      backgroundColor: "#c8e0e3",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "90%",
-                        height: "83%",
-                        backgroundImage: `url(${task.image})`,
-                        backgroundSize: "cover",
-                      }}
-                    ></div>
-                  </Card>
-                  <div className={styles.cardStr}>
-                    <p>{task.name}</p>
-                    <p>{task.others}</p>
-                    <p>{task.info}</p>
-                    <p>{task.period}</p>
-                  </div>
-                </Card>
-              </div>
-            ))}
-          </Slider>
           <div
-            style={{ width: "50%", margin: "0 auto", padding: "40px 0 0 0" }}
+            onMouseOver={() => {
+              slicker.current?.slickPause();
+              miniSlicker.current?.slickPause();
+            }}
+            onMouseOut={() => {
+              slicker.current?.slickPlay();
+              miniSlicker.current?.slickPlay();
+            }}
+          >
+            <Slider
+              dots={false}
+              lazyLoad="ondemand"
+              infinite
+              slidesToShow={1}
+              slidesToScroll={1}
+              autoplay
+              autoplaySpeed={2000}
+              centerMode
+              arrows={false}
+              ref={slicker}
+            >
+              {taskss.map((task: Tasks) => (
+                <div key={task.id}>
+                  <Card
+                    key={task.id}
+                    style={{
+                      backgroundColor: "#fff",
+                      width: "70%",
+                      height: "400px",
+                      margin: "0 auto",
+                      textDecoration: "none",
+                    }}
+                    component="a"
+                    target="_blank"
+                    href={task.link}
+                    className={styles.cardFlx}
+                  >
+                    <Card
+                      style={{
+                        width: "50%",
+                        height: "300px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        backgroundColor: "#c8e0e3",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "90%",
+                          height: "83%",
+                          backgroundImage: `url(${task.image})`,
+                          backgroundSize: "cover",
+                        }}
+                      ></div>
+                    </Card>
+                    <div className={styles.cardStr}>
+                      <h2>{task.name}</h2>
+                      <br />
+                      <p>{task.others}</p>
+                      <br />
+                      <p>{task.info}</p>
+                      <br />
+                      <p>{task.period}</p>
+                    </div>
+                  </Card>
+                </div>
+              ))}
+            </Slider>
+          </div>
+          <div
+            style={{ width: "40%", margin: "0 auto", padding: "40px 0 0 0" }}
           >
             <IconButton
               onClick={() => {
                 miniSlicker.current?.slickPrev();
+                slicker.current?.slickPrev();
               }}
               style={{
                 zIndex: "10",
+                position: "absolute",
+                bottom: "135px",
+                left: "370px",
               }}
             >
               <ArrowBackIosNewIcon fontSize="large" />
@@ -124,55 +143,79 @@ const Top = ({ tasks }: any) => {
             <IconButton
               onClick={() => {
                 miniSlicker.current?.slickNext();
+                slicker.current?.slickNext();
               }}
               style={{
                 zIndex: "10",
+                position: "absolute",
+                bottom: "135px",
+                right: "370px",
               }}
             >
               <ArrowForwardIosIcon fontSize="large" />
             </IconButton>
-            <Slider
-              ref={miniSlicker}
-              dots={false}
-              lazyLoad="ondemand"
-              infinite
-              slidesToShow={2}
-              slidesToScroll={1}
-              autoplay
-              autoplaySpeed={2000}
-              centerMode
-              arrows={false}
+            <div
+              onMouseOver={() => {
+                slicker.current?.slickPause();
+                miniSlicker.current?.slickPause();
+              }}
+              onMouseOut={() => {
+                slicker.current?.slickPlay();
+                miniSlicker.current?.slickPlay();
+              }}
             >
-              {taskss.map((task: Tasks) => (
-                <div
-                  style={{
-                    width: "fit-content",
-                    height: "auto",
-                    margin: "0",
-                  }}
-                  key={task.id}
-                  id={task.id}
-                  onClick={(e) => {
-                    slicker.current?.slickGoTo(Number(e.currentTarget.id) - 1);
-                  }}
-                >
-                  <Card
-                    component="div"
-                    key={task.id}
+              <Slider
+                ref={miniSlicker}
+                dots={false}
+                lazyLoad="ondemand"
+                infinite
+                slidesToShow={3}
+                slidesToScroll={1}
+                autoplay
+                autoplaySpeed={2000}
+                centerMode
+                centerPadding="10%"
+                arrows={false}
+              >
+                {taskss.map((task: Tasks) => (
+                  <div
                     style={{
-                      width: "150px",
-                      height: "70px",
-                      backgroundImage: `url(${task.image})`,
-                      backgroundSize: "cover",
+                      height: "auto",
+                      margin: "0",
+                      padding: "0",
                     }}
-                  ></Card>
-                </div>
-              ))}
-            </Slider>
+                    key={task.id}
+                    id={task.id}
+                    onClick={(e) => {
+                      slicker.current?.slickGoTo(
+                        Number(e.currentTarget.id) - 1
+                      );
+                      miniSlicker.current?.slickGoTo(
+                        Number(e.currentTarget.id) - 1
+                      );
+                    }}
+                  >
+                    <Card
+                      component="div"
+                      className={styles.samb}
+                      key={task.id}
+                      style={{
+                        width: "130px",
+                        height: "70px",
+                        margin: "0 0 0 10px",
+                        backgroundImage: `url(${task.image})`,
+                        backgroundSize: "cover",
+                      }}
+                    ></Card>
+                  </div>
+                ))}
+              </Slider>
+            </div>
           </div>
           <IconButton
             onClick={() => {
               slicker.current?.slickNext();
+              miniSlicker.current?.slickNext();
             }}
             style={{
               position: "absolute",

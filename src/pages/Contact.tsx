@@ -1,17 +1,42 @@
 import next from "next/types";
+import { useState } from "react";
+import axios from "axios";
 import Header from "../component/Header";
 import Footer from "@/component/Footer";
 import { Button, Card, TextField } from "@mui/material";
-import styles from "@/styles/Contact.module.css";
 import { Clear } from "@mui/icons-material";
-import { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
+import styles from "@/styles/Contact.module.css";
 
 const Contact = () => {
+  //useState
   const ctt: string = "Contact";
   const [name, setName] = useState<String>("");
   const [mail, setMail] = useState<String>("");
   const [text, setText] = useState<String>("");
+  //関数
+  const sendMails = () => {
+    const sendAgree = confirm("送信します、よろしいですか？");
+    if (sendAgree == true) {
+      axios
+        .post("/api/sendMail", {
+          mailName: name,
+          mailFrom: mail,
+          mailTxt: text,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      alert("送信しました");
+      setName("");
+      setMail("");
+      setText("");
+    } else {
+    }
+  };
   return (
     <>
       <Header />
@@ -138,6 +163,7 @@ const Contact = () => {
               variant="contained"
               endIcon={<SendIcon />}
               className={styles.send_btn}
+              onClick={sendMails}
             >
               送信する
             </Button>

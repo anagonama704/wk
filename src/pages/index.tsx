@@ -1,10 +1,4 @@
-import {
-  Key,
-  ReactElement,
-  JSXElementConstructor,
-  ReactFragment,
-  ReactPortal,
-} from "react";
+import { useState } from "react";
 import { db } from "../../Firebase/db";
 import Header from "../component/Header";
 import styles from "../styles/Home.module.css";
@@ -23,14 +17,48 @@ interface Tasks {
 
 export default function Firebase({ tasks }: any) {
   const taskss: Tasks[] = tasks;
+  const [stalkerX, setStalkerX] = useState<number>(0);
+  const [stalkerY, setStalkerY] = useState<number>(0);
+  const stalker = (e: React.MouseEvent) => {
+    setTimeout(() => {
+      console.log(e.clientX);
+      setStalkerX(e.clientX);
+      setStalkerY(e.clientY);
+      console.log(e.clientY);
+    }, 500);
+  };
+  const stalkerRiset = () => {
+    setStalkerX(0);
+    setStalkerY(0);
+  };
+
   return (
     <>
       <Header />
       <div className={styles.main}>
-        <div className={styles.visual}>
-          <h1>Firebaseのページ</h1>
+        <div className={styles.visual} onMouseMove={stalker}>
+          {/* <div
+            style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              backgroundColor: "#bbb",
+              opacity: "0.8",
+              position: "fixed",
+              top: stalkerY + "px",
+              left: stalkerX + "px",
+              margin: "-20px 0 0 -20px",
+            }}
+          ></div> */}
+          <div style={{ textAlign: "center" }}>
+            <h1 className={styles.visual_h1} style={{ color: "#" + stalkerX }}>
+              Watanabe Kei
+            </h1>
+            <br />
+            <small className={styles.visual_small}>HAL NAGOYA</small>
+          </div>
         </div>
-        <div className={styles.cardcmp}>
+        <div className={styles.cardcmp} onMouseMove={stalkerRiset}>
           <div
             style={{
               width: "100%",
@@ -48,12 +76,13 @@ export default function Firebase({ tasks }: any) {
                 target="_blank"
               >
                 <div
+                  className={styles.card_visual}
                   style={{
                     width: "300px",
                     height: "160px",
                     backgroundImage: `url(${task.image})`,
                     backgroundSize: "cover",
-                    border: "#000 1px solid",
+                    border: "#ddd 1px solid",
                   }}
                 ></div>
               </Card>

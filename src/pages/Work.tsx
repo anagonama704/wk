@@ -92,8 +92,8 @@ const Top = ({ tasks }: any) => {
                   >
                     <Card
                       style={{
-                        width: "50%",
-                        height: "300px",
+                        width: "45%",
+                        height: "250px",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -242,7 +242,7 @@ export async function getStaticProps() {
     const data = {
       id: doc.id,
       name: doc.data().name,
-      others: doc.data().others,
+      others: doc.data().others.replace("<br/>", "\n"),
       info: doc.data().info,
       image: doc.data().image,
       period: doc.data().period,

@@ -162,7 +162,7 @@ const Contact = () => {
             <Button
               variant="contained"
               endIcon={<SendIcon />}
-              className={styles.send_btn}
+              style={{ width: "100%", height: "auto", margin: " 60px 0 0 0" }}
               onClick={sendMails}
             >
               送信する

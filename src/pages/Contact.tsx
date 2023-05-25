@@ -52,6 +52,9 @@ const Contact = () => {
               autoComplete="off"
               style={{
                 backgroundColor: "#00000010",
+                width: "100%",
+                height: "auto",
+                margin: "30px 0 0 0",
               }}
               value={name}
               inputProps={{}}
@@ -86,6 +89,9 @@ const Contact = () => {
               variant="outlined"
               style={{
                 backgroundColor: "#00000010",
+                width: "100%",
+                height: "auto",
+                margin: "30px 0 0 0",
               }}
               value={mail}
               inputProps={{}}
@@ -128,6 +134,9 @@ const Contact = () => {
               variant="outlined"
               style={{
                 backgroundColor: "#00000010",
+                width: "100%",
+                height: "auto",
+                margin: "30px 0 0 0",
               }}
               size="medium"
               onChange={(e) => setText(e.target.value)}

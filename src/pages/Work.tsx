@@ -116,7 +116,7 @@ const Top = ({ tasks }: any) => {
                       <br />
                       <p>{task.info}</p>
                       <br />
-                      <p>{task.period}</p>
+                      <p>制作期間：{task.period}</p>
                     </div>
                   </Card>
                 </div>

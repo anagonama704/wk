@@ -4,6 +4,7 @@ import Header from "../component/Header";
 import styles from "../styles/Home.module.css";
 import { Card } from "@mui/material";
 import Footer from "../component/Footer";
+import Heads from "@/component/Heads";
 
 interface Tasks {
   id: string;
@@ -34,6 +35,7 @@ export default function Firebase({ tasks }: any) {
 
   return (
     <>
+      <Heads />
       <Header />
       <div className={styles.main}>
         <div className={styles.visual} onMouseMove={stalker}>

@@ -8,6 +8,7 @@ import styles from "@/styles/About.module.css";
 import Image from "next/image";
 import { db } from "../../Firebase/db";
 import Footer from "@/component/Footer";
+import Heads from "@/component/Heads";
 
 interface skilData {
   id: string;
@@ -21,6 +22,7 @@ const About = ({ tasks }: any) => {
   let skilsData: skilData[] = tasks;
   return (
     <>
+      <Heads />
       <Header />
       <div className={styles.about}>
         <Card

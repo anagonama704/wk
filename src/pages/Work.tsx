@@ -11,6 +11,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "slick-carousel/slick/slick.css";
 import { useRef } from "react";
+import Heads from "@/component/Heads";
 interface Tasks {
   id: string;
   image: string;
@@ -26,6 +27,7 @@ const Top = ({ tasks }: any) => {
   const miniSlicker = useRef<Slider>(null);
   return (
     <>
+      <Heads />
       <Header />
       <div className={styles.works}>
         <h1

@@ -7,6 +7,7 @@ import { Button, Card, TextField } from "@mui/material";
 import { Clear } from "@mui/icons-material";
 import SendIcon from "@mui/icons-material/Send";
 import styles from "@/styles/Contact.module.css";
+import Heads from "@/component/Heads";
 
 const Contact = () => {
   //useState
@@ -39,6 +40,7 @@ const Contact = () => {
   };
   return (
     <>
+      <Heads />
       <Header />
       <div className={styles.contact}>
         <Card className={styles.form_card}>

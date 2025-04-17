@@ -39,25 +39,10 @@ export default function Firebase({ tasks }: any) {
       <Header />
       <div className={styles.main}>
         <div className={styles.visual} onMouseMove={stalker}>
-          {/* <div
-            style={{
-              width: "40px",
-              height: "40px",
-              borderRadius: "50%",
-              backgroundColor: "#bbb",
-              opacity: "0.8",
-              position: "fixed",
-              top: stalkerY + "px",
-              left: stalkerX + "px",
-              margin: "-20px 0 0 -20px",
-            }}
-          ></div> */}
           <div style={{ textAlign: "center" }}>
             <h1 className={styles.visual_h1} style={{ color: "#" + stalkerX }}>
               Watanabe Kei
             </h1>
-            <br />
-            <small className={styles.visual_small}>HAL NAGOYA</small>
           </div>
         </div>
         <div className={styles.cardcmp} onMouseMove={stalkerRiset}>
@@ -76,6 +61,22 @@ export default function Firebase({ tasks }: any) {
                 component="a"
                 href={task.link}
                 target="_blank"
+                style={{
+                  margin: "16px",
+                  borderRadius: "8px",
+                  overflow: "hidden",
+                  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.05)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 16px rgba(0,0,0,0.2)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                  e.currentTarget.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
+                }}
               >
                 <div
                   className={styles.card_visual}

@@ -1,9 +1,6 @@
-import next from "next/types";
-import Link from "next/link";
 import Header from "../component/Header";
 import { db } from "../../Firebase/db";
-import { Card, IconButton } from "@mui/material";
-import Image from "next/image";
+import { Box, Card, IconButton } from "@mui/material";
 import Slider from "react-slick";
 import Footer from "../component/Footer";
 import styles from "@/styles/Work.module.css";
@@ -125,38 +122,47 @@ const Top = ({ tasks }: any) => {
               ))}
             </Slider>
           </div>
-          <div
-            style={{ width: "40%", margin: "0 auto", padding: "40px 0 0 0" }}
-          >
-            <IconButton
-              onClick={() => {
-                miniSlicker.current?.slickPrev();
-                slicker.current?.slickPrev();
-              }}
-              style={{
-                zIndex: "10",
-                position: "absolute",
-                bottom: "135px",
-                left: "370px",
-              }}
-            >
-              <ArrowBackIosNewIcon fontSize="large" />
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                miniSlicker.current?.slickNext();
-                slicker.current?.slickNext();
-              }}
-              style={{
-                zIndex: "10",
-                position: "absolute",
-                bottom: "135px",
-                right: "370px",
-              }}
-            >
-              <ArrowForwardIosIcon fontSize="large" />
-            </IconButton>
+          <Box style={{ width: "40%", margin: "0 auto" }}>
             <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <IconButton
+                onClick={() => {
+                  miniSlicker.current?.slickPrev();
+                  slicker.current?.slickPrev();
+                }}
+                style={{
+                  zIndex: "10",
+                  position: "absolute",
+                  bottom: "125px",
+                  left: "370px",
+                }}
+              >
+                <ArrowBackIosNewIcon fontSize="large" />
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  miniSlicker.current?.slickNext();
+                  slicker.current?.slickNext();
+                }}
+                style={{
+                  zIndex: "10",
+                  position: "absolute",
+                  bottom: "125px",
+                  right: "370px",
+                }}
+              >
+                <ArrowForwardIosIcon fontSize="large" />
+              </IconButton>
+            </div>
+            <div
+              style={{
+                padding: "40px 0 0 0",
+              }}
               onMouseOver={() => {
                 slicker.current?.slickPause();
                 miniSlicker.current?.slickPause();
@@ -213,7 +219,7 @@ const Top = ({ tasks }: any) => {
                 ))}
               </Slider>
             </div>
-          </div>
+          </Box>
           <IconButton
             onClick={() => {
               slicker.current?.slickNext();

@@ -7,8 +7,9 @@ import styles from "@/styles/Work.module.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "slick-carousel/slick/slick.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Heads from "@/component/Heads";
+import Image from "next/image";
 interface Tasks {
   id: string;
   image: string;
@@ -22,6 +23,7 @@ const Top = ({ tasks }: any) => {
   const taskss: Tasks[] = tasks;
   const slicker = useRef<Slider>(null);
   const miniSlicker = useRef<Slider>(null);
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
   return (
     <>
       <Heads />
@@ -73,12 +75,17 @@ const Top = ({ tasks }: any) => {
                     <Card
                       className={styles.heroImageCard}
                     >
-                      <div
+                      <Image
                         className={styles.heroImage}
-                        style={{
-                          backgroundImage: `url(${task.image})`,
+                        src={failedImages[task.id] ? "/no-image.svg" : task.image}
+                        alt={task.name}
+                        fill
+                        sizes="(max-width: 900px) 90vw, 420px"
+                        unoptimized
+                        onError={() => {
+                          setFailedImages((prev) => ({ ...prev, [task.id]: true }));
                         }}
-                      ></div>
+                      />
                     </Card>
                     <div className={styles.cardStr}>
                       <h2>{task.name}</h2>
@@ -179,10 +186,20 @@ const Top = ({ tasks }: any) => {
                         width: "130px",
                         height: "70px",
                         margin: "0 0 0 10px",
-                        backgroundImage: `url(${task.image})`,
-                        backgroundSize: "cover",
                       }}
-                    ></Card>
+                    >
+                      <Image
+                        className={styles.thumbImage}
+                        src={failedImages[task.id] ? "/no-image.svg" : task.image}
+                        alt={task.name}
+                        fill
+                        sizes="130px"
+                        unoptimized
+                        onError={() => {
+                          setFailedImages((prev) => ({ ...prev, [task.id]: true }));
+                        }}
+                      />
+                    </Card>
                   </div>
                 ))}
               </Slider>

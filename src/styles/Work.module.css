@@ -39,6 +39,7 @@
   padding: clamp(18px, 3vw, 30px);
 }
 .heroImageCard {
+  position: relative;
   width: min(420px, 100%);
   min-height: 250px;
   display: flex;
@@ -48,10 +49,7 @@
   flex-shrink: 0;
 }
 .heroImage {
-  width: 90%;
-  aspect-ratio: 16 / 10;
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
 }
 .cardStr {
   width: 100%;
@@ -79,6 +77,23 @@
 }
 .thumbSliderWrap {
   padding-top: 40px;
+}
+.samb {
+  position: relative;
+  overflow: hidden;
+}
+.thumbImage {
+  object-fit: cover;
+}
+.heroImageCard > span {
+  position: relative !important;
+  width: 90% !important;
+  aspect-ratio: 16 / 10;
+  height: auto !important;
+}
+.samb > span {
+  position: absolute !important;
+  inset: 0;
 }
 .samb:hover {
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);

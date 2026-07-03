@@ -5,6 +5,7 @@ import styles from "../styles/Home.module.css";
 import { Card } from "@mui/material";
 import Footer from "../component/Footer";
 import Heads from "@/component/Heads";
+import Image from "next/image";
 
 interface Tasks {
   id: string;
@@ -20,6 +21,7 @@ export default function Firebase({ tasks }: any) {
   const taskss: Tasks[] = tasks;
   const [stalkerX, setStalkerX] = useState<number>(0);
   const [stalkerY, setStalkerY] = useState<number>(0);
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
   const stalker = (e: React.MouseEvent) => {
     setTimeout(() => {
       console.log(e.clientX);
@@ -32,7 +34,6 @@ export default function Firebase({ tasks }: any) {
     setStalkerX(0);
     setStalkerY(0);
   };
-
   return (
     <>
       <Heads />
@@ -71,15 +72,19 @@ export default function Firebase({ tasks }: any) {
                   e.currentTarget.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
                 }}
               >
-                <div
-                  className={styles.card_visual}
-                  style={{
-                    backgroundImage: `url(${task.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    border: "#ddd 1px solid",
-                  }}
-                ></div>
+                <div className={styles.card_visual}>
+                  <Image
+                    className={styles.card_image}
+                    src={failedImages[task.id] ? "/no-image.svg" : task.image}
+                    alt={task.name}
+                    fill
+                    sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 360px"
+                    unoptimized
+                    onError={() => {
+                      setFailedImages((prev) => ({ ...prev, [task.id]: true }));
+                    }}
+                  />
+                </div>
               </Card>
             ))}
           </div>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="No image">
+  <rect width="800" height="450" fill="#e5e7eb"/>
+  <rect x="24" y="24" width="752" height="402" fill="#f3f4f6" stroke="#d1d5db" stroke-width="4"/>
+  <g fill="#9ca3af">
+    <circle cx="250" cy="190" r="36"/>
+    <path d="M120 350l140-120 90 74 110-98 220 144H120z"/>
+  </g>
+  <text x="400" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#6b7280">
+    Image unavailable
+  </text>
+</svg>

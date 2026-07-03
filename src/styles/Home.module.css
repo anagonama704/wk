@@ -42,9 +42,15 @@
   background-color: #fff;
 }
 .card_visual {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   height: auto;
+  border: #ddd 1px solid;
+  background-color: #f4f4f4;
+}
+.card_image {
+  object-fit: cover;
 }
 @media (max-width: 600px) {
   .visual {

@@ -1,13 +1,14 @@
 .about {
   width: 100%;
   height: auto;
-  padding: 50px 0;
+  padding: clamp(24px, 4vw, 50px) 0;
 }
 .cards {
-  width: 60%;
-  height: 426px;
-  padding: 70px 0;
+  width: min(960px, calc(100% - 32px));
+  min-height: 426px;
+  padding: clamp(20px, 4vw, 70px) 0;
   margin: 0 auto;
+  position: relative;
 }
 .fli {
   font-size: 25px;
@@ -33,11 +34,11 @@
 }
 
 .myimg {
-  width: 300px;
+  width: min(300px, 100%);
   height: auto;
 }
 .pro {
-  width: 350px;
+  width: min(350px, 100%);
   height: auto;
 }
 .imgflip * {
@@ -58,13 +59,14 @@
   padding: 0 0 0 10%;
 }
 .skill_cd {
-  width: 80%;
+  width: min(720px, 92%);
   height: auto;
-  padding: 20px 25px;
+  padding: 20px clamp(14px, 3vw, 25px);
   margin: 0 auto 20px auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
 
 .imgflip:hover .fli {
@@ -105,4 +107,51 @@
 }
 .p {
   font-size: 16px;
+}
+
+@media (max-width: 900px) {
+  .flexs {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 0 6%;
+  }
+  .fli {
+    font-size: 20px;
+  }
+  .p_pd {
+    flex-direction: row;
+    gap: 12px;
+  }
+  .p_pd p:first-child,
+  .p_pd p:last-child {
+    width: auto;
+  }
+  .skill_cd {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .imgflip figcaption {
+    opacity: 1;
+    position: static;
+    transform: none;
+    -webkit-transform: none;
+  }
+  .imgflip:hover .fli {
+    -webkit-transform: none;
+    transform: none;
+  }
+  .imgflip:hover figcaption {
+    transform: none;
+    -webkit-transform: none;
+  }
+  .cards {
+    padding-top: 20px;
+  }
+  .figcaption h3 {
+    padding-left: 4%;
+  }
 }

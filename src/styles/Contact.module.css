@@ -5,14 +5,14 @@
   background-color: #eee;
 }
 .form_card {
-  width: 60%;
-  height: 70vh;
+  width: min(880px, calc(100% - 32px));
+  min-height: 70vh;
   margin: 0 auto;
-  padding: 50px 0 0 0;
+  padding: clamp(24px, 4vw, 50px) 0 28px;
   background-color: #fff;
 }
 .input_cmp {
-  width: 60%;
+  width: min(560px, 92%);
   height: auto;
   margin: 0 auto;
 }
@@ -25,4 +25,13 @@
   width: 100%;
   height: auto;
   margin: 60px 0 0 0;
+}
+
+@media (max-width: 600px) {
+  .contact {
+    padding-top: 20px;
+  }
+  .form_card {
+    width: calc(100% - 20px);
+  }
 }

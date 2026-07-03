@@ -27,27 +27,14 @@ const Top = ({ tasks }: any) => {
       <Heads />
       <Header />
       <div className={styles.works}>
-        <h1
-          style={{
-            padding: "30px 0 0 0",
-            fontSize: "29px",
-            textAlign: "center",
-          }}
-        >
-          Work
-        </h1>
-        <div style={{ padding: "30px 0 30px 0" }}>
+        <h1 className={styles.title}>Work</h1>
+        <div className={styles.carouselSection}>
           <IconButton
             onClick={() => {
               slicker.current?.slickPrev();
               miniSlicker.current?.slickPrev();
             }}
-            style={{
-              position: "absolute",
-              top: "45%",
-              left: "5%",
-              zIndex: "10",
-            }}
+            className={`${styles.heroArrow} ${styles.heroArrowLeft}`}
           >
             <ArrowBackIosNewIcon fontSize="large" />
           </IconButton>
@@ -70,6 +57,7 @@ const Top = ({ tasks }: any) => {
               autoplay
               autoplaySpeed={2000}
               centerMode
+              centerPadding="0px"
               arrows={false}
               ref={slicker}
             >
@@ -77,34 +65,18 @@ const Top = ({ tasks }: any) => {
                 <div key={task.id}>
                   <Card
                     key={task.id}
-                    style={{
-                      backgroundColor: "#fff",
-                      width: "70%",
-                      height: "400px",
-                      margin: "0 auto",
-                      textDecoration: "none",
-                    }}
                     component="a"
                     target="_blank"
                     href={task.link}
-                    className={styles.cardFlx}
+                    className={`${styles.heroCard} ${styles.cardFlx}`}
                   >
                     <Card
-                      style={{
-                        width: "45%",
-                        height: "250px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        backgroundColor: "#c8e0e3",
-                      }}
+                      className={styles.heroImageCard}
                     >
                       <div
+                        className={styles.heroImage}
                         style={{
-                          width: "90%",
-                          height: "83%",
                           backgroundImage: `url(${task.image})`,
-                          backgroundSize: "cover",
                         }}
                       ></div>
                     </Card>
@@ -122,24 +94,12 @@ const Top = ({ tasks }: any) => {
               ))}
             </Slider>
           </div>
-          <Box style={{ width: "40%", margin: "0 auto" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+          <Box className={styles.thumbContainer}>
+            <div className={styles.thumbArrows}>
               <IconButton
                 onClick={() => {
                   miniSlicker.current?.slickPrev();
                   slicker.current?.slickPrev();
-                }}
-                style={{
-                  zIndex: "10",
-                  position: "absolute",
-                  bottom: "125px",
-                  left: "370px",
                 }}
               >
                 <ArrowBackIosNewIcon fontSize="large" />
@@ -149,20 +109,12 @@ const Top = ({ tasks }: any) => {
                   miniSlicker.current?.slickNext();
                   slicker.current?.slickNext();
                 }}
-                style={{
-                  zIndex: "10",
-                  position: "absolute",
-                  bottom: "125px",
-                  right: "370px",
-                }}
               >
                 <ArrowForwardIosIcon fontSize="large" />
               </IconButton>
             </div>
             <div
-              style={{
-                padding: "40px 0 0 0",
-              }}
+              className={styles.thumbSliderWrap}
               onMouseOver={() => {
                 slicker.current?.slickPause();
                 miniSlicker.current?.slickPause();
@@ -184,6 +136,22 @@ const Top = ({ tasks }: any) => {
                 centerMode
                 centerPadding="10%"
                 arrows={false}
+                responsive={[
+                  {
+                    breakpoint: 900,
+                    settings: {
+                      slidesToShow: 2,
+                      centerPadding: "0",
+                    },
+                  },
+                  {
+                    breakpoint: 600,
+                    settings: {
+                      slidesToShow: 1,
+                      centerPadding: "0",
+                    },
+                  },
+                ]}
               >
                 {taskss.map((task: Tasks) => (
                   <div
@@ -225,12 +193,7 @@ const Top = ({ tasks }: any) => {
               slicker.current?.slickNext();
               miniSlicker.current?.slickNext();
             }}
-            style={{
-              position: "absolute",
-              top: "45%",
-              right: "5%",
-              zIndex: "10",
-            }}
+            className={`${styles.heroArrow} ${styles.heroArrowRight}`}
           >
             <ArrowForwardIosIcon fontSize="large" />
           </IconButton>

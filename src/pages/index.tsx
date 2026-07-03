@@ -46,14 +46,7 @@ export default function Firebase({ tasks }: any) {
           </div>
         </div>
         <div className={styles.cardcmp} onMouseMove={stalkerRiset}>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-around",
-            }}
-          >
+          <div className={styles.cardGrid}>
             {taskss.map((task: Tasks) => (
               <Card
                 className={styles.miniCard}
@@ -81,10 +74,9 @@ export default function Firebase({ tasks }: any) {
                 <div
                   className={styles.card_visual}
                   style={{
-                    width: "300px",
-                    height: "160px",
                     backgroundImage: `url(${task.image})`,
                     backgroundSize: "cover",
+                    backgroundPosition: "center",
                     border: "#ddd 1px solid",
                   }}
                 ></div>

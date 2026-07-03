@@ -139,10 +139,17 @@
     width: calc(100% - 20px);
   }
   .heroArrow {
-    display: none;
+    display: none !important;
+  }
+  .heroArrowLeft,
+  .heroArrowRight {
+    display: none !important;
   }
   .thumbArrows {
-    display: none;
+    display: none !important;
+  }
+  .thumbContainer {
+    width: calc(100% - 20px);
   }
   .thumbSliderWrap {
     padding-top: 16px;

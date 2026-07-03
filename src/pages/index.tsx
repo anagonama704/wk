@@ -55,7 +55,7 @@ export default function Firebase({ tasks }: any) {
                 href={task.link}
                 target="_blank"
                 style={{
-                  margin: "16px",
+                  margin: "0",
                   borderRadius: "8px",
                   overflow: "hidden",
                   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",

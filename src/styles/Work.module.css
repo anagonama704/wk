@@ -133,12 +133,40 @@
 
 @media (max-width: 600px) {
   .carouselSection {
-    padding: 20px 0;
+    padding: 20px;
   }
   .heroCard {
-    width: calc(100% - 36px);
+    width: 100%;
+    margin: 0 auto;
+  }
+  .cardFlx {
+    padding: 20px;
+  }
+  .heroImageCard {
+    width: 100%;
+    min-height: 180px;
+    aspect-ratio: 16 / 10;
+    padding: 0;
+    margin: 0 auto;
+  }
+  .heroImageCard > span {
+    width: 100% !important;
   }
   .heroArrow {
-    top: 24%;
+    display: none !important;
+  }
+  .heroArrowLeft,
+  .heroArrowRight {
+    display: none !important;
+  }
+  .thumbArrows {
+    display: none !important;
+  }
+  .thumbContainer {
+    width: calc(100% - 40px);
+    margin: 0 auto;
+  }
+  .thumbSliderWrap {
+    padding-top: 16px;
   }
 }

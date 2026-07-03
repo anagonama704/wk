@@ -5,6 +5,7 @@ import styles from "../styles/Home.module.css";
 import { Card } from "@mui/material";
 import Footer from "../component/Footer";
 import Heads from "@/component/Heads";
+import Image from "next/image";
 
 interface Tasks {
   id: string;
@@ -20,6 +21,7 @@ export default function Firebase({ tasks }: any) {
   const taskss: Tasks[] = tasks;
   const [stalkerX, setStalkerX] = useState<number>(0);
   const [stalkerY, setStalkerY] = useState<number>(0);
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
   const stalker = (e: React.MouseEvent) => {
     setTimeout(() => {
       console.log(e.clientX);
@@ -32,7 +34,6 @@ export default function Firebase({ tasks }: any) {
     setStalkerX(0);
     setStalkerY(0);
   };
-
   return (
     <>
       <Heads />
@@ -46,14 +47,7 @@ export default function Firebase({ tasks }: any) {
           </div>
         </div>
         <div className={styles.cardcmp} onMouseMove={stalkerRiset}>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-around",
-            }}
-          >
+          <div className={styles.cardGrid}>
             {taskss.map((task: Tasks) => (
               <Card
                 className={styles.miniCard}
@@ -62,7 +56,7 @@ export default function Firebase({ tasks }: any) {
                 href={task.link}
                 target="_blank"
                 style={{
-                  margin: "16px",
+                  margin: "0",
                   borderRadius: "8px",
                   overflow: "hidden",
                   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
@@ -78,16 +72,19 @@ export default function Firebase({ tasks }: any) {
                   e.currentTarget.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
                 }}
               >
-                <div
-                  className={styles.card_visual}
-                  style={{
-                    width: "300px",
-                    height: "160px",
-                    backgroundImage: `url(${task.image})`,
-                    backgroundSize: "cover",
-                    border: "#ddd 1px solid",
-                  }}
-                ></div>
+                <div className={styles.card_visual}>
+                  <Image
+                    className={styles.card_image}
+                    src={failedImages[task.id] ? "/no-image.svg" : task.image}
+                    alt={task.name}
+                    fill
+                    sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 360px"
+                    unoptimized
+                    onError={() => {
+                      setFailedImages((prev) => ({ ...prev, [task.id]: true }));
+                    }}
+                  />
+                </div>
               </Card>
             ))}
           </div>

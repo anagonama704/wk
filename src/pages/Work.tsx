@@ -7,6 +7,7 @@ import styles from "@/styles/Work.module.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useRef, useState } from "react";
 import Heads from "@/component/Heads";
 import Image from "next/image";
@@ -62,6 +63,17 @@ const Top = ({ tasks }: any) => {
               centerPadding="0px"
               arrows={false}
               ref={slicker}
+              adaptiveHeight
+              responsive={[
+                {
+                  breakpoint: 600,
+                  settings: {
+                    centerMode: false,
+                    centerPadding: "0",
+                    adaptiveHeight: true,
+                  },
+                },
+              ]}
             >
               {taskss.map((task: Tasks) => (
                 <div key={task.id}>

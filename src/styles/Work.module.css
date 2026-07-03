@@ -134,13 +134,32 @@
 @media (max-width: 600px) {
   .carouselSection {
     padding: 20px;
+    overflow: hidden;
+  }
+  .carouselSection :global(.slick-slider) {
+    overflow: hidden;
+  }
+  .carouselSection :global(.slick-list) {
+    overflow: hidden;
+  }
+  .carouselSection :global(.slick-track) {
+    display: flex;
+    align-items: stretch;
+  }
+  .carouselSection :global(.slick-slide) {
+    height: auto;
+  }
+  .carouselSection :global(.slick-slide > div) {
+    height: 100%;
   }
   .heroCard {
     width: 100%;
     margin: 0 auto;
+    height: auto !important;
   }
   .cardFlx {
-    padding: 20px;
+    padding: 16px;
+    height: auto !important;
   }
   .heroImageCard {
     width: 100%;

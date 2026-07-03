@@ -136,9 +136,15 @@
     padding: 20px 0;
   }
   .heroCard {
-    width: calc(100% - 36px);
+    width: calc(100% - 20px);
   }
   .heroArrow {
-    top: 24%;
+    display: none;
+  }
+  .thumbArrows {
+    display: none;
+  }
+  .thumbSliderWrap {
+    padding-top: 16px;
   }
 }

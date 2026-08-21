@@ -13,7 +13,14 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "@/styles/Header.module.css";
 
-const pages = ["Work", "About", "Contact"];
+const LOGO_URL =
+  "https://firebasestorage.googleapis.com/v0/b/my-portfolio-30354.appspot.com/o/logo.png?alt=media&token=09825437-2b18-4e5b-b870-8d0f67db100a";
+
+const pages = [
+  { label: "Work", href: "/work" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -34,11 +41,11 @@ const Header = () => {
       style={{ backgroundColor: "#bbb" }}
       className={styles.header}
     >
-      <Container maxWidth="xl" id="ok">
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
             variant="h6"
-            component="a"
+            component={Link}
             href="/"
             sx={{
               mr: 2,
@@ -48,16 +55,9 @@ const Header = () => {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
-              overflow: "none",
             }}
-            id="logos"
           >
-            <Image
-              src="https://firebasestorage.googleapis.com/v0/b/my-portfolio-30354.appspot.com/o/logo.png?alt=media&token=09825437-2b18-4e5b-b870-8d0f67db100a"
-              alt=""
-              width={50}
-              height={40}
-            />
+            <Image src={LOGO_URL} alt="WK-portfolio ロゴ" width={50} height={40} />
           </Typography>
 
           <Box
@@ -68,7 +68,7 @@ const Header = () => {
           >
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="ナビゲーションメニューを開く"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -94,19 +94,18 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
+              <MenuItem onClick={handleCloseNavMenu} component={Link} href="/">
+                Top
+              </MenuItem>
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography
-                    textAlign="center"
-                    component={Link}
-                    href={"/" + page}
-                    style={{
-                      textDecoration: "none",
-                      color: "#000",
-                    }}
-                  >
-                    {page}
-                  </Typography>
+                <MenuItem
+                  key={page.href}
+                  onClick={handleCloseNavMenu}
+                  component={Link}
+                  href={page.href}
+                  sx={{ textDecoration: "none", color: "#000" }}
+                >
+                  {page.label}
                 </MenuItem>
               ))}
             </Menu>
@@ -115,7 +114,7 @@ const Header = () => {
           <Typography
             variant="h5"
             noWrap
-            component="a"
+            component={Link}
             href="/"
             sx={{
               mr: 2,
@@ -128,15 +127,10 @@ const Header = () => {
               textDecoration: "none",
             }}
           >
-            <Image
-              src="https://firebasestorage.googleapis.com/v0/b/my-portfolio-30354.appspot.com/o/logo.png?alt=media&token=09825437-2b18-4e5b-b870-8d0f67db100a"
-              alt=""
-              width={50}
-              height={50}
-            />
+            <Image src={LOGO_URL} alt="WK-portfolio ロゴ" width={50} height={50} />
           </Typography>
           <Box
-            component="div"
+            component="nav"
             sx={{
               flexGrow: 0.3,
               display: { xs: "none", md: "flex" },
@@ -145,29 +139,30 @@ const Header = () => {
             className={styles.menucmp}
           >
             <Button
+              component={Link}
+              href="/"
               onClick={handleCloseNavMenu}
               sx={{
                 color: "white",
                 display: "block",
                 textAlign: "center",
               }}
-              href={"/"}
             >
               Top
             </Button>
             {pages.map((page) => (
               <Button
-                id={page}
-                key={page}
+                key={page.href}
+                component={Link}
+                href={page.href}
                 onClick={handleCloseNavMenu}
                 sx={{
                   color: "white",
                   display: "block",
                   textAlign: "center",
                 }}
-                href={"/" + page}
               >
-                {page}
+                {page.label}
               </Button>
             ))}
           </Box>
@@ -176,4 +171,5 @@ const Header = () => {
     </AppBar>
   );
 };
+
 export default Header;

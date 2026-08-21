@@ -1,7 +1,5 @@
-import next from "next/types";
-
 const Footer = () => {
-  const copy: string = "2023 ©︎ watanabe kei";
+  const year = new Date().getFullYear();
 
   return (
     <footer
@@ -14,7 +12,9 @@ const Footer = () => {
         justifyContent: "center",
       }}
     >
-      <small style={{ fontSize: "10px" }}>{copy}</small>
+      <small style={{ fontSize: "10px" }}>
+        {year} © watanabe kei
+      </small>
     </footer>
   );
 };

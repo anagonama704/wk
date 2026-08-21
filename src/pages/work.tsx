@@ -1,5 +1,4 @@
 import Header from "../component/Header";
-import { db } from "../../Firebase/db";
 import { Box, Card, IconButton } from "@mui/material";
 import Slider from "react-slick";
 import Footer from "../component/Footer";
@@ -10,23 +9,30 @@ import "slick-carousel/slick/slick.css";
 import { useRef, useState } from "react";
 import Heads from "@/component/Heads";
 import Image from "next/image";
-interface Tasks {
-  id: string;
-  image: string;
-  name: string;
-  others: string;
-  info: string;
-  period: string;
-  link: string;
+import { fetchWorks } from "@/lib/works";
+import { staticPropsWithRevalidate } from "@/lib/staticProps";
+import type { WorkItem } from "@/types/portfolio";
+
+interface WorkProps {
+  tasks: WorkItem[];
 }
-const Top = ({ tasks }: any) => {
-  const taskss: Tasks[] = tasks;
+
+const Work = ({ tasks }: WorkProps) => {
   const slicker = useRef<Slider>(null);
   const miniSlicker = useRef<Slider>(null);
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+
+  const goToSlide = (index: number) => {
+    slicker.current?.slickGoTo(index);
+    miniSlicker.current?.slickGoTo(index);
+  };
+
   return (
     <>
-      <Heads />
+      <Heads
+        title="Work | WK-portfolio"
+        description="渡辺慧の制作実績一覧。"
+      />
       <Header />
       <div className={styles.works}>
         <h1 className={styles.title}>Work</h1>
@@ -37,6 +43,7 @@ const Top = ({ tasks }: any) => {
               miniSlicker.current?.slickPrev();
             }}
             className={`${styles.heroArrow} ${styles.heroArrowLeft}`}
+            aria-label="前の作品を表示"
           >
             <ArrowBackIosNewIcon fontSize="large" />
           </IconButton>
@@ -63,34 +70,36 @@ const Top = ({ tasks }: any) => {
               arrows={false}
               ref={slicker}
             >
-              {taskss.map((task: Tasks) => (
+              {tasks.map((task) => (
                 <div key={task.id}>
                   <Card
-                    key={task.id}
                     component="a"
                     target="_blank"
+                    rel="noopener noreferrer"
                     href={task.link}
                     className={`${styles.heroCard} ${styles.cardFlx}`}
                   >
-                    <Card
-                      className={styles.heroImageCard}
-                    >
+                    <Card className={styles.heroImageCard}>
                       <Image
                         className={styles.heroImage}
-                        src={failedImages[task.id] ? "/no-image.svg" : task.image}
+                        src={
+                          failedImages[task.id] ? "/no-image.svg" : task.image
+                        }
                         alt={task.name}
                         fill
                         sizes="(max-width: 900px) 90vw, 420px"
-                        unoptimized
                         onError={() => {
-                          setFailedImages((prev) => ({ ...prev, [task.id]: true }));
+                          setFailedImages((prev) => ({
+                            ...prev,
+                            [task.id]: true,
+                          }));
                         }}
                       />
                     </Card>
                     <div className={styles.cardStr}>
                       <h2>{task.name}</h2>
                       <br />
-                      <p>{task.others}</p>
+                      <p style={{ whiteSpace: "pre-line" }}>{task.others}</p>
                       <br />
                       <p>{task.info}</p>
                       <br />
@@ -108,6 +117,7 @@ const Top = ({ tasks }: any) => {
                   miniSlicker.current?.slickPrev();
                   slicker.current?.slickPrev();
                 }}
+                aria-label="前のサムネイル"
               >
                 <ArrowBackIosNewIcon fontSize="large" />
               </IconButton>
@@ -116,6 +126,7 @@ const Top = ({ tasks }: any) => {
                   miniSlicker.current?.slickNext();
                   slicker.current?.slickNext();
                 }}
+                aria-label="次のサムネイル"
               >
                 <ArrowForwardIosIcon fontSize="large" />
               </IconButton>
@@ -160,7 +171,7 @@ const Top = ({ tasks }: any) => {
                   },
                 ]}
               >
-                {taskss.map((task: Tasks) => (
+                {tasks.map((task, index) => (
                   <div
                     style={{
                       height: "auto",
@@ -168,20 +179,18 @@ const Top = ({ tasks }: any) => {
                       padding: "0",
                     }}
                     key={task.id}
-                    id={task.id}
-                    onClick={(e) => {
-                      slicker.current?.slickGoTo(
-                        Number(e.currentTarget.id) - 1
-                      );
-                      miniSlicker.current?.slickGoTo(
-                        Number(e.currentTarget.id) - 1
-                      );
+                    onClick={() => goToSlide(index)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        goToSlide(index);
+                      }
                     }}
                   >
                     <Card
                       component="div"
                       className={styles.samb}
-                      key={task.id}
                       style={{
                         width: "130px",
                         height: "70px",
@@ -190,13 +199,17 @@ const Top = ({ tasks }: any) => {
                     >
                       <Image
                         className={styles.thumbImage}
-                        src={failedImages[task.id] ? "/no-image.svg" : task.image}
+                        src={
+                          failedImages[task.id] ? "/no-image.svg" : task.image
+                        }
                         alt={task.name}
                         fill
                         sizes="130px"
-                        unoptimized
                         onError={() => {
-                          setFailedImages((prev) => ({ ...prev, [task.id]: true }));
+                          setFailedImages((prev) => ({
+                            ...prev,
+                            [task.id]: true,
+                          }));
                         }}
                       />
                     </Card>
@@ -211,6 +224,7 @@ const Top = ({ tasks }: any) => {
               miniSlicker.current?.slickNext();
             }}
             className={`${styles.heroArrow} ${styles.heroArrowRight}`}
+            aria-label="次の作品を表示"
           >
             <ArrowForwardIosIcon fontSize="large" />
           </IconButton>
@@ -221,26 +235,13 @@ const Top = ({ tasks }: any) => {
   );
 };
 
-export default Top;
-//worksコレクションの取得
+export default Work;
+
 export async function getStaticProps() {
-  const tasks: any = [];
-  const ref = await db.collection("works").get();
-  ref.docs.map((doc) => {
-    const data = {
-      id: doc.id,
-      name: doc.data().name,
-      others: doc.data().others.replace("<br/>", "\n"),
-      info: doc.data().info,
-      image: doc.data().image,
-      period: doc.data().period,
-      link: doc.data().link,
-    };
-    tasks.push(data);
-  });
-  return {
-    props: {
-      tasks,
-    },
-  };
+  try {
+    const tasks = await fetchWorks();
+    return staticPropsWithRevalidate({ tasks });
+  } catch {
+    return staticPropsWithRevalidate({ tasks: [] });
+  }
 }

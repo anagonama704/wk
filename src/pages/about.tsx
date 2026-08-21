@@ -1,4 +1,3 @@
-import next from "next/types";
 import Header from "../component/Header";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
@@ -6,23 +5,26 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import styles from "@/styles/About.module.css";
 import Image from "next/image";
-import { db } from "../../Firebase/db";
 import Footer from "@/component/Footer";
 import Heads from "@/component/Heads";
+import { fetchSkills } from "@/lib/skills";
+import { staticPropsWithRevalidate } from "@/lib/staticProps";
+import type { SkillItem } from "@/types/portfolio";
 
-interface skilData {
-  id: string;
-  name: string;
-  image: string;
-  level: number;
-  levelstyle: boolean;
-  content: string;
+const PROFILE_IMAGE =
+  "https://firebasestorage.googleapis.com/v0/b/my-portfolio-30354.appspot.com/o/my_img.jpg?alt=media&token=af7a60bb-7c10-4d4e-9cbb-232cfb7c6cac";
+
+interface AboutProps {
+  tasks: SkillItem[];
 }
-const About = ({ tasks }: any) => {
-  let skilsData: skilData[] = tasks;
+
+const About = ({ tasks }: AboutProps) => {
   return (
     <>
-      <Heads />
+      <Heads
+        title="About | WK-portfolio"
+        description="渡辺慧のプロフィールとスキル。"
+      />
       <Header />
       <div className={styles.about}>
         <Card
@@ -32,8 +34,8 @@ const About = ({ tasks }: any) => {
           <div className={styles.flexs}>
             <div className={styles.myimg}>
               <Image
-                src="https://firebasestorage.googleapis.com/v0/b/my-portfolio-30354.appspot.com/o/my_img.jpg?alt=media&token=af7a60bb-7c10-4d4e-9cbb-232cfb7c6cac"
-                alt=""
+                src={PROFILE_IMAGE}
+                alt="渡辺慧のプロフィール写真"
                 width={300}
                 height={226}
                 className={styles.fli}
@@ -63,7 +65,7 @@ const About = ({ tasks }: any) => {
           </div>
           <figcaption className={styles.figcaption}>
             <h3 style={{ padding: "0 0 0 10px" }}>Skill</h3>
-            {skilsData.map((skil: skilData) => (
+            {tasks.map((skil) => (
               <Card className={styles.skill_cd} key={skil.id}>
                 <Box
                   sx={{
@@ -94,7 +96,12 @@ const About = ({ tasks }: any) => {
                       component="div"
                       color="text.secondary"
                     >
-                      <Image src={skil.image} alt="" width={40} height={40} />
+                      <Image
+                        src={skil.image}
+                        alt={`${skil.name}のアイコン`}
+                        width={40}
+                        height={40}
+                      />
                     </Typography>
                   </Box>
                 </Box>
@@ -111,26 +118,14 @@ const About = ({ tasks }: any) => {
     </>
   );
 };
+
 export default About;
 
-//worksコレクションの取得
 export async function getStaticProps() {
-  const tasks: any = [];
-  const ref = await db.collection("skils").get();
-  ref.docs.map((doc) => {
-    const data = {
-      id: doc.id,
-      name: doc.data().name,
-      content: doc.data().content,
-      image: doc.data().image,
-      level: doc.data().levels,
-      levelstyle: doc.data().levelstyle,
-    };
-    tasks.push(data);
-  });
-  return {
-    props: {
-      tasks,
-    },
-  };
+  try {
+    const tasks = await fetchSkills();
+    return staticPropsWithRevalidate({ tasks });
+  } catch {
+    return staticPropsWithRevalidate({ tasks: [] });
+  }
 }

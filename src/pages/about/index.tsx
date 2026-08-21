@@ -1,4 +1,4 @@
-import Header from "../component/Header";
+import Header from "../../component/Header";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";

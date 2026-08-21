@@ -1,7 +1,7 @@
-import Header from "../component/Header";
+import Header from "../../component/Header";
 import { Box, Card, IconButton } from "@mui/material";
 import Slider from "react-slick";
-import Footer from "../component/Footer";
+import Footer from "../../component/Footer";
 import styles from "@/styles/Work.module.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";

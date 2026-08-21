@@ -9,13 +9,6 @@ const nextConfig = {
       },
     ],
   },
-  async redirects() {
-    return [
-      { source: "/Work", destination: "/work", permanent: true },
-      { source: "/About", destination: "/about", permanent: true },
-      { source: "/Contact", destination: "/contact", permanent: true },
-    ];
-  },
 };
 
 module.exports = nextConfig;
